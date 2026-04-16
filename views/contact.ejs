@@ -1,0 +1,115 @@
+<%- include('partials/header') %>
+
+<main class="modern-page">
+    <section class="inner-hero">
+        <h1>Contact Us</h1>
+        <p>Have questions about your next adventure? We are here to help you plan the perfect journey.</p>
+    </section>
+
+    <div class="modern-content">
+        <div class="contact-wrapper">
+            <div class="contact-info-section">
+                <h2>Get in Touch</h2>
+                <p style="color: #666; margin-bottom: 3rem;">We love hearing from fellow travelers. Whether you have a question, need recommendations, or are ready to book, our team is here for you.</p>
+                
+                <div class="contact-method-list">
+                    <div class="contact-method-item">
+                        <a href="tel:+254700000000" class="contact-link">
+                            <div class="contact-icon-box">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-detail-text">
+                                <h4>Call Us</h4>
+                                <p>+254 700 000 000</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="contact-method-item">
+                        <a href="https://wa.me/254700000000" target="_blank" class="contact-link">
+                            <div class="contact-icon-box">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="contact-detail-text">
+                                <h4>WhatsApp</h4>
+                                <p>+254 700 000 000</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="contact-method-item">
+                        <a href="mailto:info@foresthillsadventures.com" class="contact-link">
+                            <div class="contact-icon-box">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-detail-text">
+                                <h4>Email Us</h4>
+                                <p>info@foresthillsadventures.com</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="contact-method-item">
+                        <a href="#" class="contact-link">
+                            <div class="contact-icon-box">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-detail-text">
+                                <h4>Visit Us</h4>
+                                <p>Nairobi, Kenya</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="contact-method-item">
+                        <a href="#" class="contact-link">
+                            <div class="contact-icon-box">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-detail-text">
+                                <h4>Working Hours</h4>
+                                <p>Mon - Sat: 8AM - 6PM</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-section">
+                <form action="/contact" method="POST">
+                    <div class="field">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="field">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+254 7XX XXX XXX" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="How can we help you?" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your travel plans or questions..." required></textarea>
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <button type="submit" class="btn" style="width: 100%; padding: 1rem;">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

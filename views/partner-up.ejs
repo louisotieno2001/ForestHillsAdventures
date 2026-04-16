@@ -1,0 +1,130 @@
+<%- include('partials/header') %>
+
+<main class="modern-page">
+    <section class="inner-hero">
+        <h1>Partner With Us</h1>
+        <p>Join hands with ForestHillsAdventures and be part of creating extraordinary travel experiences for adventurers worldwide.</p>
+    </section>
+
+    <div class="modern-content">
+        <div class="partner-intro">
+            <h2>Why Partner With ForestHillsAdventures?</h2>
+            <p>At ForestHillsAdventures, we believe in the power of collaboration. By partnering with us, you gain access to a network of passionate travelers, industry expertise, and a platform dedicated to showcasing the best travel experiences.</p>
+        </div>
+
+        <div class="partner-benefits">
+            <div class="partner-benefit-card">
+                <i class="fas fa-handshake"></i>
+                <h3>Mutual Growth</h3>
+                <p>Expand your reach and grow your business alongside a trusted travel partner.</p>
+            </div>
+            <div class="partner-benefit-card">
+                <i class="fas fa-users"></i>
+                <h3>Access to Travelers</h3>
+                <p>Connect with a growing community of adventure seekers looking for quality services.</p>
+            </div>
+            <div class="partner-benefit-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Business Opportunities</h3>
+                <p>Unlock new revenue streams through our comprehensive partnership programs.</p>
+            </div>
+            <div class="partner-benefit-card">
+                <i class="fas fa-award"></i>
+                <h3>Quality Association</h3>
+                <p>Associate your brand with excellence and professionalism in travel and tourism.</p>
+            </div>
+        </div>
+
+        <div class="partner-types">
+            <h2>Partnership Types</h2>
+            <div class="partner-types-grid">
+                <div class="partner-type-card">
+                    <i class="fas fa-hotel"></i>
+                    <h3>Hotels & Accommodations</h3>
+                    <p>List your property and reach travelers seeking quality accommodations.</p>
+                </div>
+                <div class="partner-type-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Restaurants & Dining</h3>
+                    <p>Showcase your culinary experiences to food-loving travelers.</p>
+                </div>
+                <div class="partner-type-card">
+                    <i class="fas fa-shuttle-van"></i>
+                    <h3>Transport Providers</h3>
+                    <p>Offer reliable transportation services for our adventure seekers.</p>
+                </div>
+                <div class="partner-type-card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Tour Operators</h3>
+                    <p>Collaborate on unique tour experiences and expand your offerings.</p>
+                </div>
+                <div class="partner-type-card">
+                    <i class="fas fa-building"></i>
+                    <h3>Corporate Partners</h3>
+                    <p>Corporate travel solutions and employee incentive programs.</p>
+                </div>
+                <div class="partner-type-card">
+                    <i class="fas fa-globe-africa"></i>
+                    <h3>Destination Marketing</h3>
+                    <p>Promote your destination to a global audience of travelers.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="partner-form-section">
+            <h2>Become a Partner</h2>
+            <p style="color: #666; margin-bottom: 3rem;">Interested in partnering with us? Fill out the form below and our partnerships team will get back to you shortly.</p>
+            
+            <form action="/partner-up" method="POST">
+                <div class="input-row">
+                    <div class="field">
+                        <label for="company_name">Company Name</label>
+                        <input type="text" id="company_name" name="company_name" placeholder="Your Company Ltd." required>
+                    </div>
+                    <div class="field">
+                        <label for="contact_name">Contact Person</label>
+                        <input type="text" id="contact_name" name="contact_name" placeholder="John Doe" required>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="field">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="info@company.com" required>
+                    </div>
+                    <div class="field">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+254 7XX XXX XXX" required>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="field">
+                        <label for="partnership_type">Partnership Type</label>
+                        <select id="partnership_type" name="partnership_type" required>
+                            <option value="">Select a type...</option>
+                            <option value="hotel">Hotel / Accommodation</option>
+                            <option value="restaurant">Restaurant / Dining</option>
+                            <option value="transport">Transport Provider</option>
+                            <option value="tour_operator">Tour Operator</option>
+                            <option value="corporate">Corporate Partner</option>
+                            <option value="destination">Destination Marketing</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="website">Website (Optional)</label>
+                        <input type="url" id="website" name="website" placeholder="https://www.yourcompany.com">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="message">Tell Us About Your Business</label>
+                    <textarea id="message" name="message" placeholder="Describe your services and how you envision working with ForestHillsAdventures..." required></textarea>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <button type="submit" class="btn" style="padding: 1rem 3rem;">Submit Partnership Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

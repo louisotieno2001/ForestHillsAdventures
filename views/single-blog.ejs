@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<main class="modern-page">
+    <section class="inner-hero">
+        <h1><%= blog.title %></h1>
+        <div class="blog-meta">
+            <% if (blog.badge) { %>
+                <span class="blog-category"><%= blog.badge %></span>
+            <% } %>
+            <span class="blog-date"><%= new Date(blog.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></span>
+        </div>
+    </section>
+
+    <div class="modern-content">
+        <article class="single-blog-post">
+            <% if (blog.media) { %>
+                <div class="single-blog-image" style="background-image: url('<%= blog.media ? "http://localhost:8050" + "/assets/" + blog.media.id : "/images/placeholder.png" %>');"></div>
+            <% } else { %>
+                <div class="single-blog-image placeholder" style="background-image: url('/images/placeholder.png');"></div>
+            <% } %>
+
+            <div class="blog-body">
+                <%- blog.body %> 
+            </div>
+        </article>
+
+        <div style="text-align: center; margin: 4rem 0;">
+            <a href="/blog" class="btn">Back to Blog</a>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

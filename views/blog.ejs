@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+
+<main class="modern-page">
+    <section class="inner-hero">
+        <h1>Travel Stories & Guides</h1>
+        <p>Inspiration, tips, and insider knowledge to help you make the most of your adventures.</p>
+    </section>
+
+    <div class="modern-content">
+        <% if (blogs && blogs.length > 0) { %>
+            <div class="blog-grid">
+                <% blogs.forEach(blog => { %>
+                    <article class="blog-card">
+                        <div class="blog-image" style="background-image: url('<%= blog.media ? "http://localhost:8050" + "/assets/" + blog.media.id : "/images/placeholder.png" %>');">
+                            <% if (blog.badge) { %>
+                                <span class="blog-category"><%= blog.badge %></span>
+                            <% } %>
+                        </div>
+                        <div class="blog-content">
+                            <span class="blog-date"><%= new Date(blog.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></span>
+                            <h2><%= blog.title %></h2>
+                            <p><%= blog.body.replace(/<[^>]*>?/gm, '').substring(0, 150) %>...</p>
+                            <a href="/blog/<%= blog.id %>" class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div style="text-align: center; padding: 5rem 0;">
+                <i class="fas fa-compass" style="font-size: 3rem; color: #eee; margin-bottom: 2rem; display: block;"></i>
+                <h2>Stories Coming Soon!</h2>
+                <p>We are crafting exciting travel stories and guides for you. Check back soon for inspiration for your next adventure!</p>
+            </div>
+        <% } %>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,67 @@
+services:
+  postgres:
+    restart: always
+    image: postgres:13
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./docker/pgdata:/var/lib/postgresql/data
+    networks:
+      foresthills_net:
+
+  directus:
+    restart: always
+    image: directus/directus:11.3.2
+    depends_on:
+      - postgres
+    ports:
+      - "127.0.0.1:${DIRECTUS_PORT}:${DIRECTUS_PORT}"
+    env_file:
+      - .env
+    environment:                                                                                                                                                                
+      DB_TYPE: postgres
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: postgres
+      DB_PORT: 5432   
+      EXTENSIONS_AUTO_RELOAD: true
+      KEY: ${KEY}
+      SECRET: ${SECRET}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      PORT: ${DIRECTUS_PORT}
+    networks:
+      foresthills_net:
+    volumes:
+      - ./docker/directus/uploads:/directus/uploads
+      - ./docker/directus/extensions:/directus/extensions
+      - ./docker/directus/database:/directus/database
+      - ./docker/directus/templates:/directus/templates
+
+  express:
+    restart: always
+    build: .
+    depends_on:
+      - directus
+    env_file:
+      - .env
+    environment:
+      PORT: ${EXPRESS_PORT}
+      DIRECTUS_URL: "http://directus:${DIRECTUS_PORT}"
+      DIRECTUS_TOKEN: ${DIRECTUS_TOKEN}
+    networks:
+      foresthills_net:
+    ports:
+      - "127.0.0.1:${EXPRESS_PORT}:${EXPRESS_PORT}"
+
+networks:
+  foresthills_net:                                                                                
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.102.0/24
