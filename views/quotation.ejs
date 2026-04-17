@@ -43,8 +43,40 @@
                 <h3>2. Service Type</h3>
                 <div class="selection-grid">
                     <label class="selection-card">
-                        <input type="radio" name="service_type" value="tours" checked>
-                        <div class="card-content">Guided Tours</div>
+                        <input type="radio" name="service_type" value="guided-tour" checked>
+                        <div class="card-content">Guided Tour</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="unguided-tour">
+                        <div class="card-content">Self-Drive / Unguided Tour</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="safari">
+                        <div class="card-content">Safari</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="cultural-tour">
+                        <div class="card-content">Cultural & Heritage Tour</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="adventure">
+                        <div class="card-content">Adventure Tour</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="honeymoon">
+                        <div class="card-content">Honeymoon / Romantic</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="family">
+                        <div class="card-content">Family Vacation</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="group">
+                        <div class="card-content">Group Tour</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="cruise">
+                        <div class="card-content">Cruise</div>
                     </label>
                     <label class="selection-card">
                         <input type="radio" name="service_type" value="car-hire">
@@ -55,18 +87,947 @@
                         <div class="card-content">Hotel Booking</div>
                     </label>
                     <label class="selection-card">
-                        <input type="radio" name="service_type" value="flights">
+                        <input type="radio" name="service_type" value="air-tickets">
                         <div class="card-content">Air Ticketing</div>
                     </label>
                     <label class="selection-card">
-                        <input type="radio" name="service_type" value="packages">
+                        <input type="radio" name="service_type" value="visa">
+                        <div class="card-content">Visa Assistance</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="travel-insurance">
+                        <div class="card-content">Travel Insurance</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="full-package">
                         <div class="card-content">Full Package</div>
                     </label>
                 </div>
             </div>
 
+            <div id="service-details" class="form-group" style="display: none;">
+                <h3>3. Service Details</h3>
+
+                <div id="guided-tour-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Guided Tour Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="guided_tour_type">Tour Type</label>
+                            <select id="guided_tour_type" name="guided_tour_type">
+                                <option value="">Select tour type</option>
+                                <option value="full-day">Full Day Tour</option>
+                                <option value="half-day">Half Day Tour</option>
+                                <option value="multi-day">Multi-Day Tour</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="guided_guide_language">Preferred Guide Language</label>
+                            <select id="guided_guide_language" name="guided_guide_language">
+                                <option value="">Select language</option>
+                                <option value="english">English</option>
+                                <option value="swahili">Swahili</option>
+                                <option value="french">French</option>
+                                <option value="german">German</option>
+                                <option value="spanish">Spanish</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Special Interests</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="guided_interests" value="wildlife"><span>Wildlife</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="guided_interests" value="photography"><span>Photography</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="guided_interests" value="birding"><span>Birding</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="guided_interests" value="nature"><span>Nature</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="guided_interests" value="history"><span>History</span></label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="guided_meal_preference">Meal Preference</label>
+                        <select id="guided_meal_preference" name="guided_meal_preference">
+                            <option value="">Select preference</option>
+                            <option value="included">Meals Included</option>
+                            <option value="breakfast-only">Breakfast Only</option>
+                            <option value="own-arrangement">Own Arrangements</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="unguided-tour-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Self-Drive / Unguided Tour Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="unguided_trip_duration">Trip Duration</label>
+                            <select id="unguided_trip_duration" name="unguided_trip_duration">
+                                <option value="">Select duration</option>
+                                <option value="hours">Few Hours</option>
+                                <option value="one-day">One Day</option>
+                                <option value="weekend">Weekend (2-3 Days)</option>
+                                <option value="one-week">One Week</option>
+                                <option value="multi-week">Multi-Week</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="unguided_vehicle_option">Vehicle Option</label>
+                            <select id="unguided_vehicle_option" name="unguided_vehicle_option">
+                                <option value="">Select option</option>
+                                <option value="hire-car">Hiring a Car</option>
+                                <option value="own-car">Coming with Own Vehicle</option>
+                                <option value="public-transport">Using Public Transport</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="unguided_driving_license">Do You Know How to Drive?</label>
+                        <select id="unguided_driving_license" name="unguided_driving_license">
+                            <option value="">Select option</option>
+                            <option value="yes">Yes, I have a valid license</option>
+                            <option value="yes-international">Yes, with International Permit</option>
+                            <option value="no">No, I need a driver</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="unguided_vehicle_type">Vehicle Type Needed (if hiring)</label>
+                        <select id="unguided_vehicle_type" name="unguided_vehicle_type">
+                            <option value="">Select vehicle type</option>
+                            <option value="sedan">Sedan / Saloon</option>
+                            <option value="suv">SUV / 4x4</option>
+                            <option value="minivan">Minivan</option>
+                            <option value="luxury">Luxury Vehicle</option>
+                            <option value="camper">Camper Van</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Food & Accommodation Preferences</label>
+                        <div class="input-row">
+                            <div class="field">
+                                <label for="unguided_food">Bringing Own Food?</label>
+                                <select id="unguided_food" name="unguided_food">
+                                    <option value="">Select option</option>
+                                    <option value="yes">Yes, I will bring my own</option>
+                                    <option value="no">No, need restaurant recommendations</option>
+                                    <option value="catering">Need Catering Service</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="unguided_accommodation">Accommodation Style</label>
+                                <select id="unguided_accommodation" name="unguided_accommodation">
+                                    <option value="">Select preference</option>
+                                    <option value="camping">Camping</option>
+                                    <option value="lodges">Lodges</option>
+                                    <option value="hotels">Hotels</option>
+                                    <option value="mixed">Mix of Both</option>
+                                    <option value="not-needed">Not Needed (Day Trip)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="unguided_experience_level">Driving Experience in Africa?</label>
+                        <select id="unguided_experience_level" name="unguided_experience_level">
+                            <option value="">Select option</option>
+                            <option value="first-time">First Time - Need Route Advice</option>
+                            <option value="some-experience">Some Experience</option>
+                            <option value="experienced">Experienced</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="unguided_route_preference">Route Preference</label>
+                        <select id="unguided_route_preference" name="unguided_route_preference">
+                            <option value="">Select preference</option>
+                            <option value="scenic">Scenic / Leisure</option>
+                            <option value="direct">Direct / Shortest</option>
+                            <option value="adventurous">Off-the-Beaten-Path</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="safari-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Safari Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="safari_type">Safari Type</label>
+                            <select id="safari_type" name="safari_type">
+                                <option value="">Select safari type</option>
+                                <option value="game-drive">Game Drive</option>
+                                <option value="bush-walk">Bush Walk / Walking Safari</option>
+                                <option value="balloon">Balloon Safari</option>
+                                <option value="horseback">Horseback Safari</option>
+                                <option value="camel">Camel Safari</option>
+                                <option value="fly-camping">Fly Camping</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="safari_duration">Safari Duration</label>
+                            <select id="safari_duration" name="safari_duration">
+                                <option value="">Select duration</option>
+                                <option value="day">Day Safari</option>
+                                <option value="overnight">Overnight Safari</option>
+                                <option value="multi-day">Multi-Day Safari</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Wildlife Priorities</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="safari_interests" value="big-five"><span>Big Five</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="safari_interests" value="big-cats"><span>Big Cats</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="safari_interests" value="elephants"><span>Elephants</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="safari_interests" value="migrating-wildebeest"><span>Wildebeest Migration</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="safari_interests" value="birds"><span>Bird Watching</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="safari_interests" value="marine"><span>Marine Life</span></label>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="safari_accommodation">Accommodation Level</label>
+                            <select id="safari_accommodation" name="safari_accommodation">
+                                <option value="">Select level</option>
+                                <option value="budget">Budget / Campsite</option>
+                                <option value="mid-range">Mid-Range Lodge</option>
+                                <option value="luxury">Luxury Lodge</option>
+                                <option value="premium">Premium Tented Camp</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="safari_vehicle">Vehicle Preference</label>
+                            <select id="safari_vehicle" name="safari_vehicle">
+                                <option value="">Select preference</option>
+                                <option value="shared">Shared Game Drive</option>
+                                <option value="private">Private Vehicle</option>
+                                <option value="self-drive">Self-Drive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="safari_photography">Photography Interest</label>
+                        <select id="safari_photography" name="safari_photography">
+                            <option value="">Select option</option>
+                            <option value="casual">Casual (Phone Camera)</option>
+                            <option value="enthusiast">Enthusiast (DSLR/Mirrorless)</option>
+                            <option value="professional">Professional Equipment</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="cultural-tour-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Cultural & Heritage Tour Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="cultural_focus">Cultural Focus</label>
+                            <select id="cultural_focus" name="cultural_focus">
+                                <option value="">Select focus</option>
+                                <option value="tribal">Tribal Culture</option>
+                                <option value="historical">Historical Sites</option>
+                                <option value="artisan">Artisan & Crafts</option>
+                                <option value="culinary">Culinary Experiences</option>
+                                <option value="music-dance">Music & Dance</option>
+                                <option value="spiritual">Spiritual & Religious</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="cultural_depth">Experience Depth</label>
+                            <select id="cultural_depth" name="cultural_depth">
+                                <option value="">Select depth</option>
+                                <option value="overview">Overview Tour</option>
+                                <option value="immersive">Immersive Experience</option>
+                                <option value="homestay">Homestay Option</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="cultural_participate">Would you like to participate in activities?</label>
+                        <select id="cultural_participate" name="cultural_participate">
+                            <option value="">Select option</option>
+                            <option value="observe">Observe Only</option>
+                            <option value="some">Some Hands-on Activities</option>
+                            <option value="full">Full Participation</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="cultural_community">Community Visit Preferences</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="cultural_communities" value="maasai"><span>Maasai</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="cultural_communities" value="kikuyu"><span>Kikuyu</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="cultural_communities" value="swahili"><span>Swahili Coast</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="cultural_communities" value="luo"><span>Luo</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="cultural_communities" value="kamba"><span>Kamba</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="adventure-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Adventure Tour Details</h4>
+                    </div>
+                    <div class="field">
+                        <label>Adventure Activities</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="adventure_activities" value="hiking"><span>Hiking / Trekking</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="adventure_activities" value="mountaineering"><span>Mountaineering</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="adventure_activities" value="rafting"><span>White Water Rafting</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="adventure_activities" value="diving"><span>Diving / Snorkeling</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="adventure_activities" value="bungee"><span>Bungee Jumping</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="adventure_activities" value="sky-diving"><span>Sky Diving</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="adventure_activities" value="kayaking"><span>Kayaking / Canoeing</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="adventure_activities" value="cycling"><span>Mountain Cycling</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="adventure_activities" value="surfing"><span>Surfing</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="adventure_activities" value="paragliding"><span>Paragliding</span></label>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="adventure_difficulty">Fitness Level</label>
+                            <select id="adventure_difficulty" name="adventure_difficulty">
+                                <option value="">Select level</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="expert">Expert</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="adventure_experience">Prior Experience</label>
+                            <select id="adventure_experience" name="adventure_experience">
+                                <option value="">Select option</option>
+                                <option value="none">No Experience Needed</option>
+                                <option value="some">Some Experience</option>
+                                <option value="experienced">Experienced</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="adventure_certification">Certification Needed?</label>
+                        <select id="adventure_certification" name="adventure_certification">
+                            <option value="">Select option</option>
+                            <option value="na">Not Applicable</option>
+                            <option value="basic">Basic Training Provided</option>
+                            <option value="certified">Need Certified Guide Only</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="adventure_gear">Equipment Requirements</label>
+                        <select id="adventure_gear" name="adventure_gear">
+                            <option value="">Select option</option>
+                            <option value="all-provided">All Equipment Provided</option>
+                            <option value="personal">Need to Bring Personal Gear</option>
+                            <option value="rent">Option to Rent</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="honeymoon-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Honeymoon / Romantic Getaway Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="honeymoon_style">Romantic Style</label>
+                            <select id="honeymoon_style" name="honeymoon_style">
+                                <option value="">Select style</option>
+                                <option value="beach">Beach Retreat</option>
+                                <option value="bush">Safari & Bush</option>
+                                <option value="mountain">Mountain Retreat</option>
+                                <option value="city">City Luxury</option>
+                                <option value="island">Island Paradise</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="honeymoon_duration">Trip Duration</label>
+                            <select id="honeymoon_duration" name="honeymoon_duration">
+                                <option value="">Select duration</option>
+                                <option value="short">Short Break (3-5 Days)</option>
+                                <option value="standard">Standard (7-10 Days)</option>
+                                <option value="extended">Extended (2+ Weeks)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="honeymoon_budget_range">Budget Range</label>
+                        <select id="honeymoon_budget_range" name="honeymoon_budget_range">
+                            <option value="">Select budget</option>
+                            <option value="mid-range">Mid-Range ($2,000-5,000)</option>
+                            <option value="luxury">Luxury ($5,000-10,000)</option>
+                            <option value="ultra-luxury">Ultra-Luxury ($10,000+)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Special Arrangements</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="honeymoon_extras" value="spa"><span>Spa & Wellness</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="honeymoon_extras" value="private-dinner"><span>Private Dinner</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="honeymoon_extras" value="champagne"><span>Champagne on Arrival</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="honeymoon_extras" value="couple-massage"><span>Couple's Massage</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="honeymoon_extras" value="sunset-cruise"><span>Sunset Cruise</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="honeymoon_extras" value="flower-decor"><span>Flower Decorations</span></label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="honeymoon_anniversary">Anniversary/Birthday Trip?</label>
+                        <select id="honeymoon_anniversary" name="honeymoon_anniversary">
+                            <option value="">Select option</option>
+                            <option value="none">No Special Occasion</option>
+                            <option value="honeymoon">Honeymoon</option>
+                            <option value="anniversary">Anniversary</option>
+                            <option value="birthday">Birthday Celebration</option>
+                            <option value="babymoon">Babymoon</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="family-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Family Vacation Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="family_children_ages">Children's Ages</label>
+                            <input type="text" id="family_children_ages" name="family_children_ages" placeholder="e.g., 5, 8, 12">
+                        </div>
+                        <div class="field">
+                            <label for="family_trip_type">Vacation Type</label>
+                            <select id="family_trip_type" name="family_trip_type">
+                                <option value="">Select type</option>
+                                <option value="beach">Beach Holiday</option>
+                                <option value="safari">Wildlife Adventure</option>
+                                <option value="cultural">Cultural Education</option>
+                                <option value="adventure">Mild Adventure</option>
+                                <option value="mixed">Mixed Activities</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Family-Friendly Activities</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="family_activities" value="swimming"><span>Swimming</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="family_activities" value="kids-club"><span>Kids Club</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="family_activities" value="nature-walks"><span>Nature Walks</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="family_activities" value="cultural-visits"><span>Cultural Visits</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="family_activities" value="water-sports"><span>Water Sports</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="family_activities" value="game-drives"><span>Game Drives</span></label>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="family_accommodation">Accommodation Preference</label>
+                            <select id="family_accommodation" name="family_accommodation">
+                                <option value="">Select preference</option>
+                                <option value="hotel">Family Hotel</option>
+                                <option value="villa">Private Villa</option>
+                                <option value="cottage">Cottage / Chalet</option>
+                                <option value="suite">Family Suite</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="family_meals">Meal Requirements</label>
+                            <select id="family_meals" name="family_meals">
+                                <option value="">Select option</option>
+                                <option value="all">All Meals Included</option>
+                                <option value="breakfast">Breakfast Only</option>
+                                <option value="kids-menu">Kids Menu Options</option>
+                                <option value="special-diet">Special Dietary Needs</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="family_nanny">Childcare / Nanny Service Needed?</label>
+                        <select id="family_nanny" name="family_nanny">
+                            <option value="">Select option</option>
+                            <option value="no">No</option>
+                            <option value="part-time">Part-time</option>
+                            <option value="full-time">Full-time</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="group-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Group Tour Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="group_size">Group Size</label>
+                            <select id="group_size" name="group_size">
+                                <option value="">Select size</option>
+                                <option value="small">Small Group (2-6)</option>
+                                <option value="medium">Medium Group (7-15)</option>
+                                <option value="large">Large Group (16-30)</option>
+                                <option value="corporate">Corporate (30+)</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="group_type">Group Type</label>
+                            <select id="group_type" name="group_type">
+                                <option value="">Select type</option>
+                                <option value="friends">Friends Reunion</option>
+                                <option value="corporate">Corporate / Team Building</option>
+                                <option value="school">School / Educational</option>
+                                <option value="church">Church / Religious</option>
+                                <option value="sports">Sports Team</option>
+                                <option value="wedding">Wedding Party</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Group Interests</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="group_interests" value="team-building"><span>Team Building</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="group_interests" value="sightseeing"><span>Sightseeing</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="group_interests" value="adventure"><span>Adventure Activities</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="group_interests" value="dining"><span>Fine Dining</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="group_interests" value="entertainment"><span>Entertainment</span></label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="group_transport">Transportation Needs</label>
+                        <select id="group_transport" name="group_transport">
+                            <option value="">Select option</option>
+                            <option value="own">Our Own Transport</option>
+                            <option value="charter">Charter Bus</option>
+                            <option value="multiple">Multiple Vehicles</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="group_budget">Budget per Person</label>
+                        <select id="group_budget" name="group_budget">
+                            <option value="">Select budget</option>
+                            <option value="budget">Budget ($50-150/day)</option>
+                            <option value="mid">Mid-Range ($150-400/day)</option>
+                            <option value="premium">Premium ($400+/day)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="cruise-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Cruise Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="cruise_type">Cruise Type</label>
+                            <select id="cruise_type" name="cruise_type">
+                                <option value="">Select type</option>
+                                <option value="river">River Cruise</option>
+                                <option value="ocean">Ocean Cruise</option>
+                                <option value="dhow">Traditional Dhow Cruise</option>
+                                <option value="sunset">Sunset Cruise</option>
+                                <option value="diving">Diving Cruise</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="cruise_duration">Cruise Duration</label>
+                            <select id="cruise_duration" name="cruise_duration">
+                                <option value="">Select duration</option>
+                                <option value="half-day">Half Day</option>
+                                <option value="full-day">Full Day</option>
+                                <option value="overnight">Overnight</option>
+                                <option value="multi-day">Multi-Day</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="cruise_cabin">Cabin Preference</label>
+                        <select id="cruise_cabin" name="cruise_cabin">
+                            <option value="">Select cabin</option>
+                            <option value="shared">Shared Cabin</option>
+                            <option value="double">Double Cabin</option>
+                            <option value="suite">Suite</option>
+                            <option value="luxury-suite">Luxury Suite</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Cruise Amenities</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="cruise_amenities" value="meals"><span>Meals Included</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="cruise_amenities" value="fishing"><span>Fishing</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="cruise_amenities" value="snorkeling"><span>Snorkeling Gear</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="cruise_amenities" value="diving"><span>Diving Equipment</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="cruise_amenities" value="entertainment"><span>Live Entertainment</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="car-hire-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Car Hire Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="car_type">Vehicle Type</label>
+                            <select id="car_type" name="car_type">
+                                <option value="">Select vehicle</option>
+                                <option value="economy">Economy Car</option>
+                                <option value="compact">Compact</option>
+                                <option value="sedan">Sedan</option>
+                                <option value="suv">SUV / 4x4</option>
+                                <option value="minivan">Minivan</option>
+                                <option value="luxury">Luxury</option>
+                                <option value="van">Passenger Van</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="car_duration">Rental Duration</label>
+                            <select id="car_duration" name="car_duration">
+                                <option value="">Select duration</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="car_fuel">Fuel Policy</label>
+                            <select id="car_fuel" name="car_fuel">
+                                <option value="">Select policy</option>
+                                <option value="full-full">Full-to-Full</option>
+                                <option value="prepaid">Prepaid Fuel</option>
+                                <option value="pay-at-return">Pay at Return</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="car_transmission">Transmission</label>
+                            <select id="car_transmission" name="car_transmission">
+                                <option value="">Select transmission</option>
+                                <option value="automatic">Automatic</option>
+                                <option value="manual">Manual</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Required Features</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="car_features" value="gps"><span>GPS Navigation</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="car_features" value="wifi"><span>WiFi Hotspot</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="car_features" value="child-seat"><span>Child Seat</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="car_features" value="insurance"><span>Full Insurance</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="car_features" value="roadside"><span>Roadside Assistance</span></label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="car_driver">Driver Service</label>
+                        <select id="car_driver" name="car_driver">
+                            <option value="">Select option</option>
+                            <option value="self-drive">Self-Drive Only</option>
+                            <option value="with-driver">With Driver</option>
+                            <option value="chauffeur">Chauffeur Service</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="car_delivery">Delivery/Pickup Location</label>
+                        <input type="text" id="car_delivery" name="car_delivery" placeholder="Airport, Hotel, or specific address">
+                    </div>
+                </div>
+
+                <div id="hotels-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Hotel Booking Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="hotel_star">Star Rating</label>
+                            <select id="hotel_star" name="hotel_star">
+                                <option value="">Select rating</option>
+                                <option value="budget">Budget (1-2 Star)</option>
+                                <option value="mid-range">Mid-Range (3 Star)</option>
+                                <option value="upscale">Upscale (4 Star)</option>
+                                <option value="luxury">Luxury (5 Star)</option>
+                                <option value="boutique">Boutique / Unique</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="hotel_rooms">Number of Rooms</label>
+                            <select id="hotel_rooms" name="hotel_rooms">
+                                <option value="">Select rooms</option>
+                                <option value="1">1 Room</option>
+                                <option value="2">2 Rooms</option>
+                                <option value="3-5">3-5 Rooms</option>
+                                <option value="6+">6+ Rooms</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="hotel_room_type">Room Type</label>
+                            <select id="hotel_room_type" name="hotel_room_type">
+                                <option value="">Select room type</option>
+                                <option value="single">Single</option>
+                                <option value="double">Double</option>
+                                <option value="twin">Twin</option>
+                                <option value="triple">Triple</option>
+                                <option value="suite">Suite</option>
+                                <option value="family">Family Room</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="hotel_board">Board Basis</label>
+                            <select id="hotel_board" name="hotel_board">
+                                <option value="">Select basis</option>
+                                <option value="room-only">Room Only</option>
+                                <option value="bed-breakfast">Bed & Breakfast</option>
+                                <option value="half-board">Half Board</option>
+                                <option value="full-board">Full Board</option>
+                                <option value="all-inclusive">All Inclusive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Amenities Required</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="hotel_amenities" value="wifi"><span>Free WiFi</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="hotel_amenities" value="pool"><span>Swimming Pool</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="hotel_amenities" value="gym"><span>Gym / Fitness</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="hotel_amenities" value="spa"><span>Spa</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="hotel_amenities" value="parking"><span>Parking</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="hotel_amenities" value="restaurant"><span>Restaurant</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="hotel_amenities" value="airport-shuttle"><span>Airport Shuttle</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="hotel_amenities" value="pets"><span>Pet Friendly</span></label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="hotel_special">Special Requirements</label>
+                        <input type="text" id="hotel_special" name="hotel_special" placeholder="e.g., Ground floor, Sea view, Near medical facility">
+                    </div>
+                </div>
+
+                <div id="air-tickets-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Air Ticketing Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="flight_type">Flight Type</label>
+                            <select id="flight_type" name="flight_type">
+                                <option value="">Select type</option>
+                                <option value="one-way">One Way</option>
+                                <option value="round-trip">Round Trip</option>
+                                <option value="multi-city">Multi-City</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="flight_class">Class</label>
+                            <select id="flight_class" name="flight_class">
+                                <option value="">Select class</option>
+                                <option value="economy">Economy</option>
+                                <option value="premium-economy">Premium Economy</option>
+                                <option value="business">Business</option>
+                                <option value="first">First Class</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="flight_from">Departure City</label>
+                        <input type="text" id="flight_from" name="flight_from" placeholder="e.g., Nairobi (NBO)">
+                    </div>
+                    <div class="field">
+                        <label for="flight_to">Destination City</label>
+                        <input type="text" id="flight_to" name="flight_to" placeholder="e.g., Mombasa (MBA)">
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="flight_return_date">Return Date (if round trip)</label>
+                            <input type="date" id="flight_return_date" name="flight_return_date">
+                        </div>
+                        <div class="field">
+                            <label for="flight_airline">Airline Preference</label>
+                            <select id="flight_airline" name="flight_airline">
+                                <option value="">Select airline</option>
+                                <option value="no-preference">No Preference</option>
+                                <option value="kenya-airways">Kenya Airways</option>
+                                <option value="safari-link">Safari Link</option>
+                                <option value="jambojet">Jambojet</option>
+                                <option value="fly540">Fly540</option>
+                                <option value="ethiopian">Ethiopian Airlines</option>
+                                <option value="emirates">Emirates</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="flight_baggage">Extra Baggage Required?</label>
+                        <select id="flight_baggage" name="flight_baggage">
+                            <option value="">Select option</option>
+                            <option value="standard">Standard Allowance</option>
+                            <option value="extra">Extra Baggage (+ cost)</option>
+                            <option value="cargo">Cargo Shipment</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="visa-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Visa Assistance Details</h4>
+                    </div>
+                    <div class="field">
+                        <label for="visa_country">Destination Country</label>
+                        <input type="text" id="visa_country" name="visa_country" placeholder="e.g., Kenya, Tanzania, USA">
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="visa_type">Visa Type</label>
+                            <select id="visa_type" name="visa_type">
+                                <option value="">Select type</option>
+                                <option value="tourist">Tourist Visa</option>
+                                <option value="business">Business Visa</option>
+                                <option value="student">Student Visa</option>
+                                <option value="work">Work Visa</option>
+                                <option value="transit">Transit Visa</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="visa_duration">Intended Stay</label>
+                            <select id="visa_duration" name="visa_duration">
+                                <option value="">Select duration</option>
+                                <option value="short">Short Stay (up to 30 days)</option>
+                                <option value="medium">Medium Stay (1-3 months)</option>
+                                <option value="long">Long Stay (3+ months)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="visa_entries">Number of Entries</label>
+                        <select id="visa_entries" name="visa_entries">
+                            <option value="">Select entries</option>
+                            <option value="single">Single Entry</option>
+                            <option value="multiple">Multiple Entry</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Current Citizenship</label>
+                        <input type="text" id="visa_citizenship" name="visa_citizenship" placeholder="Your current country of citizenship">
+                    </div>
+                    <div class="field">
+                        <label>Supporting Documents Available</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="visa_docs" value="passport"><span>Valid Passport</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="visa_docs" value="invitation"><span>Invitation Letter</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="visa_docs" value="hotel-booking"><span>Hotel Booking</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="visa_docs" value="flight-booking"><span>Flight Itinerary</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="visa_docs" value="bank-statement"><span>Bank Statements</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="visa_docs" value="employment"><span>Employment Letter</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="travel-insurance-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Travel Insurance Details</h4>
+                    </div>
+                    <div class="field">
+                        <label for="insurance_coverage">Coverage Type</label>
+                        <select id="insurance_coverage" name="insurance_coverage">
+                            <option value="">Select coverage</option>
+                            <option value="basic">Basic Coverage</option>
+                            <option value="standard">Standard Coverage</option>
+                            <option value="comprehensive">Comprehensive Coverage</option>
+                            <option value="premium">Premium Coverage</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Coverage Required</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="medical"><span>Medical Emergency</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="trip-cancel"><span>Trip Cancellation</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="baggage"><span>Baggage Loss/Delay</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="flight-delay"><span>Flight Delay</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="personal-liability"><span>Personal Liability</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="adventure-sports"><span>Adventure Sports</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="evacuation"><span>Emergency Evacuation</option>
+                            <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="cancel-any-reason"><span>Cancel for Any Reason</span></label>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="insurance_trip_value">Estimated Trip Value</label>
+                            <input type="text" id="insurance_trip_value" name="insurance_trip_value" placeholder="e.g., $5,000">
+                        </div>
+                        <div class="field">
+                            <label for="insurance_travelers">Travelers Being Covered</label>
+                            <select id="insurance_travelers" name="insurance_travelers">
+                                <option value="">Select</option>
+                                <option value="individual">Individual</option>
+                                <option value="couple">Couple</option>
+                                <option value="family">Family</option>
+                                <option value="group">Group</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="insurance_destination">Primary Destination</label>
+                        <input type="text" id="insurance_destination" name="insurance_destination" placeholder="Main countries you'll visit">
+                    </div>
+                </div>
+
+                <div id="full-package-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Full Package Details</h4>
+                        <p class="service-form-desc">Tell us everything about your dream trip and we'll create a comprehensive package for you!</p>
+                    </div>
+                    <div class="field">
+                        <label for="package_trip_type">Trip Type</label>
+                        <select id="package_trip_type" name="package_trip_type">
+                            <option value="">Select type</option>
+                            <option value="safari">Safari Adventure</option>
+                            <option value="beach">Beach Holiday</option>
+                            <option value="combined">Safari + Beach Combination</option>
+                            <option value="cultural">Cultural Exploration</option>
+                            <option value="adventure">Adventure Tour</option>
+                            <option value="luxury">Luxury Getaway</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="package_duration">Trip Duration</label>
+                            <select id="package_duration" name="package_duration">
+                                <option value="">Select duration</option>
+                                <option value="short">Short (3-5 Days)</option>
+                                <option value="standard">Standard (7-10 Days)</option>
+                                <option value="extended">Extended (10-14 Days)</option>
+                                <option value="long">Long (2+ Weeks)</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="package_budget">Budget Range</label>
+                            <select id="package_budget" name="package_budget">
+                                <option value="">Select budget</option>
+                                <option value="budget">Budget ($1,000-3,000)</option>
+                                <option value="mid-range">Mid-Range ($3,000-6,000)</option>
+                                <option value="premium">Premium ($6,000-10,000)</option>
+                                <option value="luxury">Luxury ($10,000+)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Services Needed</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="package_services" value="flights"><span>Flights</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="package_services" value="accommodation"><span>Accommodation</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="package_services" value="transport"><span>Ground Transport</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="package_services" value="meals"><span>Meals</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="package_services" value="activities"><span>Activities & Tours</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="package_services" value="guide"><span>Professional Guide</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="package_services" value="insurance"><span>Travel Insurance</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="package_services" value="visa"><span>Visa Assistance</span></label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="package_special">Special Requirements or Dreams</label>
+                        <textarea id="package_special" name="package_special" rows="3" placeholder="Tell us your must-see destinations, dream activities, special celebrations, or any unique requirements..."></textarea>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
-                <h3>3. Travel Details</h3>
+                <h3 id="travel-details-heading">4. Travel Details</h3>
                 <div class="input-row">
                     <div class="field">
                         <label for="travel_date">Preferred Travel Date</label>
@@ -80,7 +1041,7 @@
             </div>
 
             <div class="form-group" style="margin-top: 4rem;">
-                <h3>4. Additional Information</h3>
+                <h3 id="additional-info-heading">5. Additional Information</h3>
                 <textarea id="message" name="message" placeholder="Tell us about your preferences, special requirements, or any questions you have..."></textarea>
             </div>
 
@@ -90,5 +1051,58 @@
         </form>
     </div>
 </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const serviceRadios = document.querySelectorAll('input[name="service_type"]');
+    const serviceDetails = document.getElementById('service-details');
+    const travelHeading = document.getElementById('travel-details-heading');
+    const additionalHeading = document.getElementById('additional-info-heading');
+    const serviceForms = {
+        'guided-tour': document.getElementById('guided-tour-details'),
+        'unguided-tour': document.getElementById('unguided-tour-details'),
+        'safari': document.getElementById('safari-details'),
+        'cultural-tour': document.getElementById('cultural-tour-details'),
+        'adventure': document.getElementById('adventure-details'),
+        'honeymoon': document.getElementById('honeymoon-details'),
+        'family': document.getElementById('family-details'),
+        'group': document.getElementById('group-details'),
+        'cruise': document.getElementById('cruise-details'),
+        'car-hire': document.getElementById('car-hire-details'),
+        'hotels': document.getElementById('hotels-details'),
+        'air-tickets': document.getElementById('air-tickets-details'),
+        'visa': document.getElementById('visa-details'),
+        'travel-insurance': document.getElementById('travel-insurance-details'),
+        'full-package': document.getElementById('full-package-details')
+    };
+
+    function updateForm() {
+        let selectedService = 'guided-tour';
+        serviceRadios.forEach(radio => {
+            if (radio.checked) {
+                selectedService = radio.value;
+            }
+        });
+
+        serviceDetails.style.display = 'block';
+
+        Object.keys(serviceForms).forEach(key => {
+            if (serviceForms[key]) {
+                serviceForms[key].style.display = 'none';
+            }
+        });
+
+        if (serviceForms[selectedService]) {
+            serviceForms[selectedService].style.display = 'block';
+        }
+    }
+
+    serviceRadios.forEach(radio => {
+        radio.addEventListener('change', updateForm);
+    });
+
+    updateForm();
+});
+</script>
 
 <%- include('partials/footer') %>

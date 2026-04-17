@@ -537,6 +537,72 @@ form select:focus {
     color: white;
 }
 
+.service-form {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 1rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    border: 1px solid #e8e8e8;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.service-form-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.service-form-header h4 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.service-form-header p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.checkbox-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 25px;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+}
+
+.checkbox-item:hover {
+    border-color: var(--primary-color);
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin-right: 0.5rem;
+    width: auto;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-item input:checked + span {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
 .pill-selector label:hover {
     border-color: var(--primary-color);
 }
