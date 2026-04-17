@@ -71,7 +71,7 @@ router.get('/blog/:id', async (req, res) => {
 
 router.post('/contact', async (req, res) => {
     const query = req.app.get('query');
-    const { name, email, phone, subject, message } = req.body;
+    const { name, email, phone, subject, message, preferred_contact } = req.body;
 
     try {
         const response = await query('/items/contact_us', {
@@ -82,6 +82,7 @@ router.post('/contact', async (req, res) => {
                 phone,
                 subject,
                 message,
+                preferred_contact,
                 status: 'published'
             })
         });
@@ -105,7 +106,7 @@ router.post('/contact', async (req, res) => {
 
 router.post('/submit-quotation', async (req, res) => {
     const query = req.app.get('query');
-    const { name, email, phone, destination, service_type, travel_date, num_travelers, message } = req.body;
+    const { name, email, phone, destination, service_type, travel_date, num_travelers, message, country, town } = req.body;
 
     try {
         const response = await query('/items/quotation_requests', {
@@ -119,6 +120,7 @@ router.post('/submit-quotation', async (req, res) => {
                 travel_date,
                 num_travelers,
                 message,
+                current_location: `${town}, ${country}`,
                 status: 'published'
             })
         });

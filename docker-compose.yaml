@@ -29,12 +29,13 @@ services:
     env_file:
       - .env
     environment:                                                                                                                                                                
+      DB_CLIENT: pg
       DB_TYPE: postgres
       DB_DATABASE: ${DB_DATABASE}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: postgres
-      DB_PORT: 5432   
+      DB_PORT: 5432
       EXTENSIONS_AUTO_RELOAD: true
       KEY: ${KEY}
       SECRET: ${SECRET}
@@ -46,6 +47,7 @@ services:
     volumes:
       - ./docker/directus/uploads:/directus/uploads
       - ./docker/directus/extensions:/directus/extensions
+      - ./docker/directus/database:/directus/database
       - ./docker/directus/templates:/directus/templates
 
   express:

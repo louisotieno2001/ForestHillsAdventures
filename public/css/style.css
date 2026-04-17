@@ -509,6 +509,38 @@ form select:focus {
     gap: 2rem;
 }
 
+.pill-selector {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.pill-selector input[type="radio"] {
+    display: none;
+}
+
+.pill-selector label {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pill-selector input[type="radio"]:checked + label {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.pill-selector label:hover {
+    border-color: var(--primary-color);
+}
+
 @media (max-width: 600px) {
     .input-row {
         grid-template-columns: 1fr;
