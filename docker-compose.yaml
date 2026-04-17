@@ -10,6 +10,11 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./docker/pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_DATABASE}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       foresthills_net:
 
@@ -17,7 +22,8 @@ services:
     restart: always
     image: directus/directus:11.3.2
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     ports:
       - "127.0.0.1:${DIRECTUS_PORT}:${DIRECTUS_PORT}"
     env_file:
@@ -40,7 +46,6 @@ services:
     volumes:
       - ./docker/directus/uploads:/directus/uploads
       - ./docker/directus/extensions:/directus/extensions
-      - ./docker/directus/database:/directus/database
       - ./docker/directus/templates:/directus/templates
 
   express:
