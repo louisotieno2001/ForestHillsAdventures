@@ -766,22 +766,29 @@ form select:focus {
 .service-features {
     list-style: none;
     padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    margin: 0 0 2rem;
 }
 
 .service-features li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.8rem;
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #555;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
 }
 
 .service-features i {
     color: var(--primary-color);
     font-size: 0.9rem;
+    margin-top: 0.3rem;
+    flex-shrink: 0;
+}
+
+.service-features strong {
+    color: #222;
+    font-weight: 600;
 }
 
 @media (max-width: 850px) {
@@ -798,6 +805,35 @@ form select:focus {
     
     .service-text h2 {
         font-size: 2rem;
+    }
+    
+    .service-text p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-row {
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+    
+    .service-image {
+        min-height: 200px;
+        border-radius: 15px;
+    }
+    
+    .service-text h2 {
+        font-size: 1.6rem;
+    }
+    
+    .service-text p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .service-features li {
+        font-size: 0.9rem;
     }
 }
 
