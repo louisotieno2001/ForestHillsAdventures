@@ -43,7 +43,11 @@
                 <h3>2. Service Type</h3>
                 <div class="selection-grid">
                     <label class="selection-card">
-                        <input type="radio" name="service_type" value="guided-tour" checked>
+                        <input type="radio" name="service_type" value="conference" checked>
+                        <div class="card-content">Conference & Events</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="guided-tour">
                         <div class="card-content">Guided Tour</div>
                     </label>
                     <label class="selection-card">
@@ -79,6 +83,14 @@
                         <div class="card-content">Cruise</div>
                     </label>
                     <label class="selection-card">
+                        <input type="radio" name="service_type" value="short-stay">
+                        <div class="card-content">Short Stay Apartment</div>
+                    </label>
+                    <label class="selection-card">
+                        <input type="radio" name="service_type" value="long-stay">
+                        <div class="card-content">Long Stay Apartment</div>
+                    </label>
+                    <label class="selection-card">
                         <input type="radio" name="service_type" value="car-hire">
                         <div class="card-content">Car Hire</div>
                     </label>
@@ -107,6 +119,115 @@
 
             <div id="service-details" class="form-group" style="display: none;">
                 <h3>3. Service Details</h3>
+
+                <div id="conference-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Conference & Events Planning Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="conference_type">Event Type</label>
+                            <select id="conference_type" name="conference_type">
+                                <option value="">Select event type</option>
+                                <option value="corporate">Corporate Conference</option>
+                                <option value="seminar">Seminar / Workshop</option>
+                                <option value="training">Training Session</option>
+                                <option value="product-launch">Product Launch</option>
+                                <option value="annual-meeting">Annual General Meeting</option>
+                                <option value="board-meeting">Board Meeting</option>
+                                <option value="team-building">Team Building Event</option>
+                                <option value="award-ceremony">Award Ceremony</option>
+                                <option value="exhibition">Exhibition / Trade Show</option>
+                                <option value="wedding">Wedding / Private Event</option>
+                                <option value="birthday">Birthday Celebration</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="conference_attendees">Expected Attendees</label>
+                            <select id="conference_attendees" name="conference_attendees">
+                                <option value="">Select number</option>
+                                <option value="small">Small (10-30)</option>
+                                <option value="medium">Medium (31-100)</option>
+                                <option value="large">Large (101-300)</option>
+                                <option value="xlarge">Extra Large (300+)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="conference_date">Event Date</label>
+                            <input type="date" id="conference_date" name="conference_date">
+                        </div>
+                        <div class="field">
+                            <label for="conference_duration">Event Duration</label>
+                            <select id="conference_duration" name="conference_duration">
+                                <option value="">Select duration</option>
+                                <option value="half-day">Half Day</option>
+                                <option value="full-day">Full Day</option>
+                                <option value="multi-day">Multi-Day</option>
+                                <option value="week">One Week</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="conference_venue">Venue Preference</label>
+                        <select id="conference_venue" name="conference_venue">
+                            <option value="">Select venue type</option>
+                            <option value="hotel-ballroom">Hotel Ballroom</option>
+                            <option value="conference-center">Conference Center</option>
+                            <option value="boardroom">Boardroom / Meeting Room</option>
+                            <option value="outdoor">Outdoor / Garden Venue</option>
+                            <option value="virtual">Virtual / Hybrid</option>
+                            <option value="open">Open to Suggestions</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Services Required</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="venue"><span>Venue Booking</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="catering"><span>Catering</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="av-equipment"><span>AV Equipment</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="projector"><span>Projector / Screens</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="microphones"><span>Microphones</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="livestream"><span>Live Streaming</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="photography"><span>Photography / Videography</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="branding"><span>Branding / Signage</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="transport"><span>Transport / Shuttle</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="accommodation"><span>Accommodation</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="entertainment"><span>Entertainment</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="conference_services" value="security"><span>Security</span></label>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="conference_budget">Budget Range</label>
+                            <select id="conference_budget" name="conference_budget">
+                                <option value="">Select budget</option>
+                                <option value="budget">Budget ($1,000-5,000)</option>
+                                <option value="mid">Mid-Range ($5,000-15,000)</option>
+                                <option value="premium">Premium ($15,000-50,000)</option>
+                                <option value="luxury">Luxury ($50,000+)</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="conference_catering">Catering Style</label>
+                            <select id="conference_catering" name="conference_catering">
+                                <option value="">Select style</option>
+                                <option value="buffet">Buffet</option>
+                                <option value="plated">Plated Dinner</option>
+                                <option value="cocktail">Cocktail Reception</option>
+                                <option value="break">Coffee Breaks Only</option>
+                                <option value="working-lunch">Working Lunch</option>
+                                <option value="custom">Custom Menu</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="conference_special">Special Requirements</label>
+                        <textarea id="conference_special" name="conference_special" rows="3" placeholder="Any specific themes, dietary requirements, accessibility needs, or special arrangements..."></textarea>
+                    </div>
+                </div>
 
                 <div id="guided-tour-details" class="service-form">
                     <div class="service-form-header">
@@ -657,6 +778,210 @@
                     </div>
                 </div>
 
+                <div id="short-stay-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Short Stay Apartment Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="short_apartment_type">Apartment Type</label>
+                            <select id="short_apartment_type" name="short_apartment_type">
+                                <option value="">Select type</option>
+                                <option value="studio">Studio</option>
+                                <option value="one-bedroom">1 Bedroom</option>
+                                <option value="two-bedroom">2 Bedroom</option>
+                                <option value="three-bedroom">3+ Bedroom</option>
+                                <option value="penthouse">Penthouse</option>
+                                <option value="serviced-apartment">Serviced Apartment</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="short_duration">Stay Duration</label>
+                            <select id="short_duration" name="short_duration">
+                                <option value="">Select duration</option>
+                                <option value="1-week">1 Week</option>
+                                <option value="2-weeks">2 Weeks</option>
+                                <option value="1-month">1 Month</option>
+                                <option value="flexible">Flexible Duration</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="short_location">Preferred Location</label>
+                        <input type="text" id="short_location" name="short_location" placeholder="e.g., Westlands, Kilimani, Karen">
+                    </div>
+                    <div class="field">
+                        <label>Amenities Required</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="short_amenities" value="wifi"><span>WiFi</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="short_amenities" value="parking"><span>Parking</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="short_amenities" value="gym"><span>Gym</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="short_amenities" value="pool"><span>Pool</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="short_amenities" value="security"><span>24/7 Security</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="short_amenities" value="cleaning"><span>Housekeeping</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="short_amenities" value="ac"><span>Air Conditioning</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="short_amenities" value="kitchen"><span>Fully Equipped Kitchen</span></label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="short_furnished">Furnishing Preference</label>
+                        <select id="short_furnished" name="short_furnished">
+                            <option value="">Select preference</option>
+                            <option value="fully-furnished">Fully Furnished</option>
+                            <option value="partially">Partially Furnished</option>
+                            <option value="unfurnished">Unfurnished</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="short_checkin">Check-in Date</label>
+                            <input type="date" id="short_checkin" name="short_checkin">
+                        </div>
+                        <div class="field">
+                            <label for="short_guests">Number of Guests</label>
+                            <select id="short_guests" name="short_guests">
+                                <option value="">Select guests</option>
+                                <option value="1">1 Person</option>
+                                <option value="2">2 Persons</option>
+                                <option value="3-4">3-4 Persons</option>
+                                <option value="5+">5+ Persons</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="short_budget">Budget Range (per month)</label>
+                        <select id="short_budget" name="short_budget">
+                            <option value="">Select budget</option>
+                            <option value="budget">Budget ($500-1,000)</option>
+                            <option value="mid">Mid-Range ($1,000-2,500)</option>
+                            <option value="premium">Premium ($2,500-5,000)</option>
+                            <option value="luxury">Luxury ($5,000+)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="short_pets">Pet Friendly Required?</label>
+                        <select id="short_pets" name="short_pets">
+                            <option value="">Select option</option>
+                            <option value="no">No Pets</option>
+                            <option value="cats">Cats Only</option>
+                            <option value="dogs">Dogs Only</option>
+                            <option value="any">Any Pets Welcome</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="long-stay-details" class="service-form">
+                    <div class="service-form-header">
+                        <h4>Long Stay Apartment Details</h4>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="long_apartment_type">Apartment Type</label>
+                            <select id="long_apartment_type" name="long_apartment_type">
+                                <option value="">Select type</option>
+                                <option value="studio">Studio</option>
+                                <option value="one-bedroom">1 Bedroom</option>
+                                <option value="two-bedroom">2 Bedroom</option>
+                                <option value="three-bedroom">3 Bedroom</option>
+                                <option value="four-plus">4+ Bedrooms</option>
+                                <option value="townhouse">Townhouse</option>
+                                <option value="penthouse">Penthouse</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="long_duration">Lease Duration</label>
+                            <select id="long_duration" name="long_duration">
+                                <option value="">Select duration</option>
+                                <option value="3-months">3 Months</option>
+                                <option value="6-months">6 Months</option>
+                                <option value="1-year">1 Year</option>
+                                <option value="2-years">2 Years</option>
+                                <option value="open">Open / Month-to-Month</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="long_location">Preferred Location</label>
+                        <input type="text" id="long_location" name="long_location" placeholder="e.g., Westlands, Kilimani, Karen, Lavington">
+                    </div>
+                    <div class="field">
+                        <label>Essential Amenities</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="long_amenities" value="wifi"><span>WiFi</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="long_amenities" value="parking"><span>Parking</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="long_amenities" value="gym"><span>Gym Access</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="long_amenities" value="pool"><span>Pool</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="long_amenities" value="security"><span>Security</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="long_amenities" value="generator"><span>Backup Power</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="long_amenities" value="water"><span>Constant Water</span></label>
+                            <label class="checkbox-item"><input type="checkbox" name="long_amenities" value="furnished"><span>Furnished</span></label>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="field">
+                            <label for="long_move_date">Preferred Move-in Date</label>
+                            <input type="date" id="long_move_date" name="long_move_date">
+                        </div>
+                        <div class="field">
+                            <label for="long_occupants">Number of Occupants</label>
+                            <select id="long_occupants" name="long_occupants">
+                                <option value="">Select occupants</option>
+                                <option value="1">1 Person</option>
+                                <option value="2">2 Persons</option>
+                                <option value="3-4">3-4 Persons</option>
+                                <option value="5-6">5-6 Persons</option>
+                                <option value="family">Family (7+)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="long_employment">Employment Status</label>
+                        <select id="long_employment" name="long_employment">
+                            <option value="">Select status</option>
+                            <option value="employed">Employed (Corporate)</option>
+                            <option value="self-employed">Self-Employed / Business Owner</option>
+                            <option value="expat">Expatriate</option>
+                            <option value="diplomat">Diplomat</option>
+                            <option value="student">Student</option>
+                            <option value="retired">Retired</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="long_budget">Monthly Budget</label>
+                        <select id="long_budget" name="long_budget">
+                            <option value="">Select budget</option>
+                            <option value="budget">Budget ($500-1,500)</option>
+                            <option value="mid">Mid-Range ($1,500-3,000)</option>
+                            <option value="premium">Premium ($3,000-5,000)</option>
+                            <option value="luxury">Luxury ($5,000+)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="long_parking">Parking Requirements</label>
+                        <select id="long_parking" name="long_parking">
+                            <option value="">Select option</option>
+                            <option value="none">No Parking Needed</option>
+                            <option value="single">Single Parking Bay</option>
+                            <option value="double">Double Parking Bay</option>
+                            <option value="shaded">Shaded / Covered Parking</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="long_pets">Pets</label>
+                        <select id="long_pets" name="long_pets">
+                            <option value="">Select option</option>
+                            <option value="no">No Pets</option>
+                            <option value="small">Small Pets Only</option>
+                            <option value="dogs">Dogs Allowed</option>
+                            <option value="any">All Pets Welcome</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="long_special">Additional Requirements</label>
+                        <textarea id="long_special" name="long_special" rows="2" placeholder="Home office setup, storage needs, proximity to schools, etc."></textarea>
+                    </div>
+                </div>
+
                 <div id="car-hire-details" class="service-form">
                     <div class="service-form-header">
                         <h4>Car Hire Details</h4>
@@ -941,7 +1266,7 @@
                             <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="flight-delay"><span>Flight Delay</span></label>
                             <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="personal-liability"><span>Personal Liability</span></label>
                             <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="adventure-sports"><span>Adventure Sports</span></label>
-                            <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="evacuation"><span>Emergency Evacuation</option>
+                            <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="evacuation"><span>Emergency Evacuation</span></label>
                             <label class="checkbox-item"><input type="checkbox" name="insurance_features" value="cancel-any-reason"><span>Cancel for Any Reason</span></label>
                         </div>
                     </div>
@@ -1059,6 +1384,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const travelHeading = document.getElementById('travel-details-heading');
     const additionalHeading = document.getElementById('additional-info-heading');
     const serviceForms = {
+        'conference': document.getElementById('conference-details'),
         'guided-tour': document.getElementById('guided-tour-details'),
         'unguided-tour': document.getElementById('unguided-tour-details'),
         'safari': document.getElementById('safari-details'),
@@ -1068,6 +1394,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'family': document.getElementById('family-details'),
         'group': document.getElementById('group-details'),
         'cruise': document.getElementById('cruise-details'),
+        'short-stay': document.getElementById('short-stay-details'),
+        'long-stay': document.getElementById('long-stay-details'),
         'car-hire': document.getElementById('car-hire-details'),
         'hotels': document.getElementById('hotels-details'),
         'air-tickets': document.getElementById('air-tickets-details'),
@@ -1077,7 +1405,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function updateForm() {
-        let selectedService = 'guided-tour';
+        let selectedService = 'conference';
         serviceRadios.forEach(radio => {
             if (radio.checked) {
                 selectedService = radio.value;
