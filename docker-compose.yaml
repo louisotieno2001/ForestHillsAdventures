@@ -45,7 +45,7 @@ services:
     networks:
       foresthills_net:
     volumes:
-      - ./docker/directus/uploads:/directus/uploads
+      - directus-uploads:/directus/uploads
       - ./docker/directus/extensions:/directus/extensions
       - ./docker/directus/database:/directus/database
       - ./docker/directus/templates:/directus/templates
@@ -72,3 +72,6 @@ networks:
     ipam:
       config:
         - subnet: 192.168.102.0/24
+
+volumes:
+  directus-uploads:
