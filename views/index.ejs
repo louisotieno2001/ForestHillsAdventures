@@ -1,84 +1,114 @@
 <%- include('partials/header') %>
 
 <main class="index-main">
-    <section class="hero">
-        <h2>Discover the World With Us</h2>
-        <p>From breathtaking safaris to serene beach retreats, ForestHillsAdventures transforms your travel dreams into unforgettable realities. Let us guide you to extraordinary destinations.</p>
-        <a href="/get-quotation" class="btn">Plan Your Adventure</a>
+    <!-- Section 1: Cinematic Split Hero (Local hero.jpg) -->
+    <section class="split-hero">
+        <div class="split-hero-image reveal-left"></div>
+        <div class="split-hero-text reveal-right">
+            <h2>Discover the World With Us</h2>
+            <p>From breathtaking safaris to serene beach retreats, ForestHillsAdventures transforms your travel dreams into unforgettable realities.</p>
+            <a href="/get-quotation" class="btn">Plan Your Adventure</a>
+        </div>
     </section>
 
-    <section class="story-section">
-        <h2>Your Journey Begins Here</h2>
-        <p>At ForestHillsAdventures, we believe that travel is not just about visiting new places—it's about immersing yourself in cultures, creating lifelong memories, and discovering the beauty that our world has to offer.</p>
-        <p>With years of expertise in crafting personalized travel experiences, we take pride in being your trusted travel partner. Whether you seek adventure in the wild, relaxation on pristine beaches, or seamless business travel, we have got you covered.</p>
-        <a href="/services" class="btn">Explore Our Services</a>
+    <!-- Section 2: Story Chapter (Local hero-sample.jpg) -->
+    <section class="cinematic-section">
+        <div class="cinematic-bg" style="background-image: url('/images/hero-sample.jpg');"></div>
+        <div class="cinematic-content">
+            <h2 class="cinematic-title reveal-left">Your Journey Begins Here</h2>
+            <p class="cinematic-lead reveal-right">At ForestHillsAdventures, we believe that travel is not just about visiting new places—it's about immersing yourself in cultures, creating lifelong memories, and discovering the beauty that our world has to offer.</p>
+        </div>
     </section>
 
-    <section class="featured-services">
-        <h2>What We Offer</h2>
-        <div class="service-cards-grid">
-            <div class="service-card">
-                <i class="fas fa-binoculars"></i>
-                <h3>Guided Tours</h3>
-                <p>Explore iconic landmarks and hidden gems with our expert guides.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-car"></i>
-                <h3>Car Hire</h3>
-                <p>Freedom to explore at your own pace with our reliable vehicle rentals.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-hotel"></i>
-                <h3>Hotel Bookings</h3>
-                <p>From luxury resorts to cozy boutique hotels, find your perfect stay.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-plane"></i>
-                <h3>Air Ticketing</h3>
-                <p>Competitive fares and seamless booking for domestic and international flights.</p>
+    <!-- Section 3: Horizontal Scroll Showcase (Complete with Local Images) -->
+    <section class="horizontal-scroll-section">
+        <div class="sticky-horizontal-wrapper">
+            <div class="horizontal-content-strip">
+                <!-- 1. Guided Tours (tours.jpg) -->
+                <div class="horizontal-showcase-item">
+                    <div class="rounded-showcase-image-wrapper">
+                        <img src="/images/tours.jpg" alt="Guided Tours" class="rounded-showcase-image">
+                        <div class="horizontal-showcase-text">
+                            <h3>Guided Tours</h3>
+                            <p>Explore iconic landmarks and hidden gems with our expert guides. Curated adventures led by passionate local experts.</p>
+                            <a href="/services#tours" class="horizontal-showcase-link">See More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Car Hire (car-hire.jpg) -->
+                <div class="horizontal-showcase-item">
+                    <div class="rounded-showcase-image-wrapper">
+                        <img src="/images/car-hire.jpg" alt="Car Hire" class="rounded-showcase-image">
+                        <div class="horizontal-showcase-text">
+                            <h3>Car Hire</h3>
+                            <p>Freedom to explore at your own pace with our diverse fleet of vehicles. From rugged 4x4 safari vehicles to comfortable city sedans.</p>
+                            <a href="/services#car-hire" class="horizontal-showcase-link">See More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Hotel Bookings (hotel-booking.webp) -->
+                <div class="horizontal-showcase-item">
+                    <div class="rounded-showcase-image-wrapper">
+                        <img src="/images/hotel-booking.webp" alt="Hotel Bookings" class="rounded-showcase-image">
+                        <div class="horizontal-showcase-text">
+                            <h3>Hotel Bookings</h3>
+                            <p>From luxury resorts to cozy boutique hotels, find your perfect stay. We partner with the best to ensure your comfort, privacy, and security.</p>
+                            <a href="/services#hotels" class="horizontal-showcase-link">See More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Conferencing & Events (conferrence.jpg) -->
+                <div class="horizontal-showcase-item">
+                    <div class="rounded-showcase-image-wrapper">
+                        <img src="/images/conferrence.jpg" alt="Conferencing" class="rounded-showcase-image">
+                        <div class="horizontal-showcase-text">
+                            <h3>Conferencing & Events</h3>
+                            <p>Host meetings and retreats in settings that inspire connection. From state-of-the-art rooms to unique outdoor bush venues.</p>
+                            <a href="/services#conferencing" class="horizontal-showcase-link">See More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Air Ticketing (flights.webp) -->
+                <div class="horizontal-showcase-item">
+                    <div class="rounded-showcase-image-wrapper">
+                        <img src="/images/flights.webp" alt="Air Ticketing" class="rounded-showcase-image">
+                        <div class="horizontal-showcase-text">
+                            <h3>Air Ticketing</h3>
+                            <p>Competitive fares and seamless booking for domestic and international flights. Expert guidance to find the best connections.</p>
+                            <a href="/services#flights" class="horizontal-showcase-link">See More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Travel Packages (packages.png) -->
+                <div class="horizontal-showcase-item">
+                    <div class="rounded-showcase-image-wrapper">
+                        <img src="/images/packages.png" alt="Travel Packages" class="rounded-showcase-image">
+                        <div class="horizontal-showcase-text">
+                            <h3>Travel Packages</h3>
+                            <p>Experience worry-free travel with our all-inclusive packages. We handle everything from flights to unique local activities.</p>
+                            <a href="/services#packages" class="horizontal-showcase-link">See More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
-        <h2>What Our Travelers Say</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p>"ForestHillsAdventures made our dream safari a reality. The attention to detail and personalized service was exceptional. We will definitely be booking again!"</p>
-                <h4>Sarah & James Mitchell</h4>
-                <span>London, UK</span>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p>"Professional, reliable, and truly passionate about travel. They handled our corporate travel needs flawlessly. Highly recommended for business travelers!"</p>
-                <h4>TechStart Kenya</h4>
-                <span>Nairobi, Kenya</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <h2>Ready for Your Next Adventure?</h2>
-        <p>Let us help you plan the perfect trip. Get in touch today and start your journey.</p>
+    <!-- Section 4: Final Cinematic CTA (Local hero.jpg Parallaxed) -->
+    <section class="cta-section reveal-on-scroll" style="background: linear-gradient(rgba(46, 125, 50, 0.8), rgba(46, 125, 50, 0.8)), url('/images/hero.jpg'); background-size: cover; background-position: center; padding: 12rem 2rem;">
+        <h2 style="color: #fff; font-size: 4rem; font-family: 'Playfair Display', serif; margin-bottom: 2rem;">Ready for Your Next Adventure?</h2>
+        <p style="color: #fff; font-size: 1.4rem; max-width: 700px; margin: 0 auto 3rem; opacity: 0.9;">Let us help you plan the perfect trip. Get in touch today and start your journey with ForestHillsAdventures.</p>
         <div class="cta-buttons">
-            <a href="/get-quotation" class="btn">Get a Free Quote</a>
-            <a href="/contact" class="btn btn-outline">Contact Us</a>
+            <a href="/get-quotation" class="btn" style="background: #fff; color: var(--primary-color); font-weight: 700; padding: 1.5rem 3rem;">Get a Free Quote</a>
+            <a href="/contact" class="btn btn-outline" style="border-width: 2px; padding: 1.5rem 3rem;">Contact Us</a>
         </div>
     </section>
 </main>
 
+<script src="/js/scrollytelling.js"></script>
 <%- include('partials/footer') %>
