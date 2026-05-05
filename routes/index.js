@@ -10,9 +10,9 @@ router.get('/', (req, res) => {
       "@context": "https://schema.org",
       "@type": "TravelAgency",
       "name": "ForestHillsAdventures",
-      "url": "https://foresthillsadventures.com",
-      "logo": "https://foresthillsadventures.com/images/logo.jpg",
-      "image": "https://foresthillsadventures.com/images/hero.jpg",
+      "url": "https://foresthills.co.ke",
+      "logo": "https://foresthills.co.ke/images/logo.jpg",
+      "image": "https://foresthills.co.ke/images/hero.jpg",
       "description": "Your Gateway to Extraordinary Travel Experiences, from safaris to beach retreats.",
       "address": {
         "@type": "PostalAddress",
@@ -124,7 +124,7 @@ router.get('/blog/:id', async (req, res) => {
               "@context": "https://schema.org",
               "@type": "BlogPosting",
               "headline": data.data.title,
-              "image": data.data.media ? `https://foresthillsadventures.com/assets/${data.data.media.id}` : "https://foresthillsadventures.com/images/hero.jpg",
+              "image": data.data.media ? `https://foresthills.co.ke/assets/${data.data.media.id}` : "https://foresthills.co.ke/images/hero.jpg",
               "datePublished": data.data.date_created,
               "dateModified": data.data.date_updated || data.data.date_created,
               "author": {
@@ -136,7 +136,7 @@ router.get('/blog/:id', async (req, res) => {
                 "name": "ForestHillsAdventures",
                 "logo": {
                   "@type": "ImageObject",
-                  "url": "https://foresthillsadventures.com/images/logo.jpg"
+                  "url": "https://foresthills.co.ke/images/logo.jpg"
                 }
               },
               "description": data.data.body || data.data.body.substring(0, 160).replace(/<[^>]*>/g, '')
@@ -434,7 +434,7 @@ router.post('/partner-up', async (req, res) => {
 
 router.get('/sitemap.xml', async (req, res) => {
     const query = req.app.get('query');
-    const baseUrl = 'https://foresthillsadventures.com';
+    const baseUrl = 'https://foresthills.co.ke';
     const staticPages = [
         '',
         '/services',
