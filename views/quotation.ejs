@@ -1370,13 +1370,17 @@
                 <textarea id="message" name="message" placeholder="Tell us about your preferences, special requirements, or any questions you have..."></textarea>
             </div>
 
-            <div style="text-align: center; margin-top: 5rem;">
+            <div class="field" style="text-align: center; margin-top: 2rem;">
+                <div class="g-recaptcha" data-sitekey="<%= recaptcha_site_key %>" style="display: inline-block;"></div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
                 <button type="submit" class="btn" style="padding: 1rem 4rem; font-size: 1.1rem; border-radius: 50px;">Request Quotation</button>
             </div>
         </form>
     </div>
 </main>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const serviceRadios = document.querySelectorAll('input[name="service_type"]');

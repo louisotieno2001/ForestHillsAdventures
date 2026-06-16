@@ -115,6 +115,9 @@
                         <textarea id="message" name="message" placeholder="Tell us about your travel plans or questions..." required></textarea>
                     </div>
 
+                    <div class="field" style="margin-top: 1.5rem;">
+                        <div class="g-recaptcha" data-sitekey="<%= recaptcha_site_key %>"></div>
+                    </div>
                     <div style="margin-top: 2rem;">
                         <button type="submit" class="btn" style="width: 100%; padding: 1rem;">Send Message</button>
                     </div>
@@ -124,4 +127,5 @@
     </div>
 </main>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <%- include('partials/footer') %>

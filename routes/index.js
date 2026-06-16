@@ -1,5 +1,42 @@
 const express = require('express');
+const validator = require('validator');
 const router = express.Router();
+
+function sanitize(str) {
+  if (typeof str !== 'string') return '';
+  return validator.trim(validator.stripLow(str, true));
+}
+
+function sanitizeOptional(str) {
+  if (!str || typeof str !== 'string') return '';
+  return sanitize(str);
+}
+
+function validateEmail(email) {
+  return email && validator.isEmail(email);
+}
+
+function validatePhone(phone) {
+  return phone && validator.isMobilePhone(phone, 'any', { strictMode: false });
+}
+
+function validateRequiredText(str, maxLen = 500) {
+  return str && typeof str === 'string' && str.trim().length > 0 && str.trim().length <= maxLen;
+}
+
+function validateRecaptcha(token) {
+  if (!token) return false;
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  if (!secret) return false;
+  const params = new URLSearchParams({ secret, response: token });
+  return fetch('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    body: params
+  })
+  .then(r => r.json())
+  .then(data => data.success === true)
+  .catch(() => false);
+}
 
 router.get('/', (req, res) => {
   res.render('index', { 
@@ -56,7 +93,8 @@ router.get('/contact', (req, res) => {
   res.render('contact', { 
     title: 'Contact Us - Plan Your Next Adventure | ForestHillsAdventures',
     description: 'Get in touch with ForestHillsAdventures. Our travel experts are ready to help you plan your perfect trip or answer any questions.',
-    path: '/contact'
+    path: '/contact',
+    recaptcha_site_key: process.env.RECAPTCHA_SITE_KEY || ''
   });
 });
 
@@ -64,7 +102,8 @@ router.get('/get-quotation', (req, res) => {
   res.render('quotation', { 
     title: 'Request a Travel Quote - Bespoke Vacation Packages | ForestHillsAdventures',
     description: 'Ready for your next trip? Request a free, personalized travel quotation for safaris, tours, or luxury stays today.',
-    path: '/get-quotation'
+    path: '/get-quotation',
+    recaptcha_site_key: process.env.RECAPTCHA_SITE_KEY || ''
   });
 });
 
@@ -72,7 +111,8 @@ router.get('/partner-up', (req, res) => {
   res.render('partner-up', { 
     title: 'Partner With Us - Travel Industry Partnerships | ForestHillsAdventures',
     description: 'Join forces with ForestHillsAdventures. We are looking for travel partners, hotels, and service providers to grow together.',
-    path: '/partner-up'
+    path: '/partner-up',
+    recaptcha_site_key: process.env.RECAPTCHA_SITE_KEY || ''
   });
 });
 
@@ -153,7 +193,27 @@ router.get('/blog/:id', async (req, res) => {
 
 router.post('/contact', async (req, res) => {
     const query = req.app.get('query');
-    const { name, email, phone, subject, message, preferred_contact } = req.body;
+    const name = sanitize(req.body.name);
+    const email = sanitize(req.body.email);
+    const phone = sanitize(req.body.phone);
+    const subject = sanitize(req.body.subject);
+    const message = sanitize(req.body.message);
+    const preferred_contact = sanitize(req.body.preferred_contact);
+
+    if (!validateRequiredText(name, 100) || !validateEmail(email) || !validatePhone(phone) || !validateRequiredText(subject, 200) || !validateRequiredText(message, 5000) || !['email', 'call', 'sms'].includes(preferred_contact)) {
+        return res.status(400).render('error', {
+            title: 'Validation Error',
+            message: 'Please check your inputs and try again. Ensure all required fields are filled correctly.'
+        });
+    }
+
+    const recaptchaValid = await validateRecaptcha(req.body['g-recaptcha-response']);
+    if (!recaptchaValid) {
+        return res.status(400).render('error', {
+            title: 'Verification Failed',
+            message: 'reCAPTCHA verification failed. Please try again.'
+        });
+    }
 
     try {
         const response = await query('/items/contact_us', {
@@ -164,7 +224,7 @@ router.post('/contact', async (req, res) => {
                 phone,
                 subject,
                 message,
-                preferred_contact,
+                preferred_contact: ['email', 'call', 'sms'].includes(preferred_contact) ? preferred_contact : 'email',
                 status: 'published'
             })
         });
@@ -188,177 +248,200 @@ router.post('/contact', async (req, res) => {
 
 router.post('/submit-quotation', async (req, res) => {
     const query = req.app.get('query');
-    const { 
-        name, email, phone, destination, service_type, travel_date, 
-        num_travelers, message, country, town
-    } = req.body;
+    const name = sanitize(req.body.name);
+    const email = sanitize(req.body.email);
+    const phone = sanitize(req.body.phone);
+    const destination = sanitize(req.body.destination);
+    const service_type = sanitize(req.body.service_type);
+    const travel_date = sanitize(req.body.travel_date);
+    const num_travelers = req.body.num_travelers;
+    const message = sanitize(req.body.message);
+    const country = sanitize(req.body.country);
+    const town = sanitize(req.body.town);
+
+    const validServiceTypes = ['conference','guided-tour','unguided-tour','safari','cultural-tour','adventure','honeymoon','family','group','cruise','short-stay','long-stay','car-hire','hotels','air-tickets','visa','travel-insurance','full-package'];
+
+    if (!validateRequiredText(name, 100) || !validateEmail(email) || !validatePhone(phone) || !validateRequiredText(destination, 200) || !validateRequiredText(country, 100) || !validateRequiredText(town, 100) || !validServiceTypes.includes(service_type)) {
+        return res.status(400).render('error', {
+            title: 'Validation Error',
+            message: 'Please check your inputs and try again. Ensure all required fields are filled correctly.'
+        });
+    }
+
+    const recaptchaValid = await validateRecaptcha(req.body['g-recaptcha-response']);
+    if (!recaptchaValid) {
+        return res.status(400).render('error', {
+            title: 'Verification Failed',
+            message: 'reCAPTCHA verification failed. Please try again.'
+        });
+    }
 
     const serviceDetails = {};
 
     if (service_type === 'conference') {
-        serviceDetails.conference_type = req.body.conference_type;
-        serviceDetails.conference_attendees = req.body.conference_attendees;
-        serviceDetails.conference_date = req.body.conference_date;
-        serviceDetails.conference_duration = req.body.conference_duration;
-        serviceDetails.conference_venue = req.body.conference_venue;
-        serviceDetails.conference_services = req.body.conference_services;
-        serviceDetails.conference_budget = req.body.conference_budget;
-        serviceDetails.conference_catering = req.body.conference_catering;
-        serviceDetails.conference_special = req.body.conference_special;
+        serviceDetails.conference_type = sanitizeOptional(req.body.conference_type);
+        serviceDetails.conference_attendees = sanitizeOptional(req.body.conference_attendees);
+        serviceDetails.conference_date = sanitizeOptional(req.body.conference_date);
+        serviceDetails.conference_duration = sanitizeOptional(req.body.conference_duration);
+        serviceDetails.conference_venue = sanitizeOptional(req.body.conference_venue);
+        serviceDetails.conference_services = sanitizeOptional(req.body.conference_services);
+        serviceDetails.conference_budget = sanitizeOptional(req.body.conference_budget);
+        serviceDetails.conference_catering = sanitizeOptional(req.body.conference_catering);
+        serviceDetails.conference_special = sanitizeOptional(req.body.conference_special);
     }
 
     if (service_type === 'guided-tour') {
-        serviceDetails.tour_type = req.body.guided_tour_type;
-        serviceDetails.guide_language = req.body.guided_guide_language;
-        serviceDetails.interests = req.body.guided_interests;
-        serviceDetails.meal_preference = req.body.guided_meal_preference;
+        serviceDetails.tour_type = sanitizeOptional(req.body.guided_tour_type);
+        serviceDetails.guide_language = sanitizeOptional(req.body.guided_guide_language);
+        serviceDetails.interests = sanitizeOptional(req.body.guided_interests);
+        serviceDetails.meal_preference = sanitizeOptional(req.body.guided_meal_preference);
     }
 
     if (service_type === 'unguided-tour') {
-        serviceDetails.trip_duration = req.body.unguided_trip_duration;
-        serviceDetails.vehicle_option = req.body.unguided_vehicle_option;
-        serviceDetails.driving_license = req.body.unguided_driving_license;
-        serviceDetails.vehicle_type = req.body.unguided_vehicle_type;
-        serviceDetails.food_preference = req.body.unguided_food;
-        serviceDetails.accommodation_style = req.body.unguided_accommodation;
-        serviceDetails.experience_level = req.body.unguided_experience_level;
-        serviceDetails.route_preference = req.body.unguided_route_preference;
+        serviceDetails.trip_duration = sanitizeOptional(req.body.unguided_trip_duration);
+        serviceDetails.vehicle_option = sanitizeOptional(req.body.unguided_vehicle_option);
+        serviceDetails.driving_license = sanitizeOptional(req.body.unguided_driving_license);
+        serviceDetails.vehicle_type = sanitizeOptional(req.body.unguided_vehicle_type);
+        serviceDetails.food_preference = sanitizeOptional(req.body.unguided_food);
+        serviceDetails.accommodation_style = sanitizeOptional(req.body.unguided_accommodation);
+        serviceDetails.experience_level = sanitizeOptional(req.body.unguided_experience_level);
+        serviceDetails.route_preference = sanitizeOptional(req.body.unguided_route_preference);
     }
 
     if (service_type === 'safari') {
-        serviceDetails.safari_type = req.body.safari_type;
-        serviceDetails.safari_duration = req.body.safari_duration;
-        serviceDetails.wildlife_interests = req.body.safari_interests;
-        serviceDetails.accommodation_level = req.body.safari_accommodation;
-        serviceDetails.vehicle_preference = req.body.safari_vehicle;
-        serviceDetails.photography_interest = req.body.safari_photography;
+        serviceDetails.safari_type = sanitizeOptional(req.body.safari_type);
+        serviceDetails.safari_duration = sanitizeOptional(req.body.safari_duration);
+        serviceDetails.wildlife_interests = sanitizeOptional(req.body.safari_interests);
+        serviceDetails.accommodation_level = sanitizeOptional(req.body.safari_accommodation);
+        serviceDetails.vehicle_preference = sanitizeOptional(req.body.safari_vehicle);
+        serviceDetails.photography_interest = sanitizeOptional(req.body.safari_photography);
     }
 
     if (service_type === 'cultural-tour') {
-        serviceDetails.cultural_focus = req.body.cultural_focus;
-        serviceDetails.experience_depth = req.body.cultural_depth;
-        serviceDetails.participation_level = req.body.cultural_participate;
-        serviceDetails.communities = req.body.cultural_communities;
+        serviceDetails.cultural_focus = sanitizeOptional(req.body.cultural_focus);
+        serviceDetails.experience_depth = sanitizeOptional(req.body.cultural_depth);
+        serviceDetails.participation_level = sanitizeOptional(req.body.cultural_participate);
+        serviceDetails.communities = sanitizeOptional(req.body.cultural_communities);
     }
 
     if (service_type === 'adventure') {
-        serviceDetails.activities = req.body.adventure_activities;
-        serviceDetails.fitness_level = req.body.adventure_difficulty;
-        serviceDetails.prior_experience = req.body.adventure_experience;
-        serviceDetails.certification_needed = req.body.adventure_certification;
-        serviceDetails.equipment_requirements = req.body.adventure_gear;
+        serviceDetails.activities = sanitizeOptional(req.body.adventure_activities);
+        serviceDetails.fitness_level = sanitizeOptional(req.body.adventure_difficulty);
+        serviceDetails.prior_experience = sanitizeOptional(req.body.adventure_experience);
+        serviceDetails.certification_needed = sanitizeOptional(req.body.adventure_certification);
+        serviceDetails.equipment_requirements = sanitizeOptional(req.body.adventure_gear);
     }
 
     if (service_type === 'honeymoon') {
-        serviceDetails.romantic_style = req.body.honeymoon_style;
-        serviceDetails.trip_duration = req.body.honeymoon_duration;
-        serviceDetails.budget_range = req.body.honeymoon_budget_range;
-        serviceDetails.special_arrangements = req.body.honeymoon_extras;
-        serviceDetails.special_occasion = req.body.honeymoon_anniversary;
+        serviceDetails.romantic_style = sanitizeOptional(req.body.honeymoon_style);
+        serviceDetails.trip_duration = sanitizeOptional(req.body.honeymoon_duration);
+        serviceDetails.budget_range = sanitizeOptional(req.body.honeymoon_budget_range);
+        serviceDetails.special_arrangements = sanitizeOptional(req.body.honeymoon_extras);
+        serviceDetails.special_occasion = sanitizeOptional(req.body.honeymoon_anniversary);
     }
 
     if (service_type === 'family') {
-        serviceDetails.children_ages = req.body.family_children_ages;
-        serviceDetails.vacation_type = req.body.family_trip_type;
-        serviceDetails.family_activities = req.body.family_activities;
-        serviceDetails.accommodation_preference = req.body.family_accommodation;
-        serviceDetails.meal_requirements = req.body.family_meals;
-        serviceDetails.childcare_needed = req.body.family_nanny;
+        serviceDetails.children_ages = sanitizeOptional(req.body.family_children_ages);
+        serviceDetails.vacation_type = sanitizeOptional(req.body.family_trip_type);
+        serviceDetails.family_activities = sanitizeOptional(req.body.family_activities);
+        serviceDetails.accommodation_preference = sanitizeOptional(req.body.family_accommodation);
+        serviceDetails.meal_requirements = sanitizeOptional(req.body.family_meals);
+        serviceDetails.childcare_needed = sanitizeOptional(req.body.family_nanny);
     }
 
     if (service_type === 'group') {
-        serviceDetails.group_size = req.body.group_size;
-        serviceDetails.group_type = req.body.group_type;
-        serviceDetails.group_interests = req.body.group_interests;
-        serviceDetails.transportation_needs = req.body.group_transport;
-        serviceDetails.budget_per_person = req.body.group_budget;
+        serviceDetails.group_size = sanitizeOptional(req.body.group_size);
+        serviceDetails.group_type = sanitizeOptional(req.body.group_type);
+        serviceDetails.group_interests = sanitizeOptional(req.body.group_interests);
+        serviceDetails.transportation_needs = sanitizeOptional(req.body.group_transport);
+        serviceDetails.budget_per_person = sanitizeOptional(req.body.group_budget);
     }
 
     if (service_type === 'cruise') {
-        serviceDetails.cruise_type = req.body.cruise_type;
-        serviceDetails.cruise_duration = req.body.cruise_duration;
-        serviceDetails.cabin_preference = req.body.cruise_cabin;
-        serviceDetails.cruise_amenities = req.body.cruise_amenities;
+        serviceDetails.cruise_type = sanitizeOptional(req.body.cruise_type);
+        serviceDetails.cruise_duration = sanitizeOptional(req.body.cruise_duration);
+        serviceDetails.cabin_preference = sanitizeOptional(req.body.cruise_cabin);
+        serviceDetails.cruise_amenities = sanitizeOptional(req.body.cruise_amenities);
     }
 
     if (service_type === 'short-stay') {
-        serviceDetails.apartment_type = req.body.short_apartment_type;
-        serviceDetails.stay_duration = req.body.short_duration;
-        serviceDetails.preferred_location = req.body.short_location;
-        serviceDetails.amenities = req.body.short_amenities;
-        serviceDetails.furnishing_preference = req.body.short_furnished;
-        serviceDetails.checkin_date = req.body.short_checkin;
-        serviceDetails.number_of_guests = req.body.short_guests;
-        serviceDetails.budget_range = req.body.short_budget;
-        serviceDetails.pet_friendly = req.body.short_pets;
+        serviceDetails.apartment_type = sanitizeOptional(req.body.short_apartment_type);
+        serviceDetails.stay_duration = sanitizeOptional(req.body.short_duration);
+        serviceDetails.preferred_location = sanitizeOptional(req.body.short_location);
+        serviceDetails.amenities = sanitizeOptional(req.body.short_amenities);
+        serviceDetails.furnishing_preference = sanitizeOptional(req.body.short_furnished);
+        serviceDetails.checkin_date = sanitizeOptional(req.body.short_checkin);
+        serviceDetails.number_of_guests = sanitizeOptional(req.body.short_guests);
+        serviceDetails.budget_range = sanitizeOptional(req.body.short_budget);
+        serviceDetails.pet_friendly = sanitizeOptional(req.body.short_pets);
     }
 
     if (service_type === 'long-stay') {
-        serviceDetails.apartment_type = req.body.long_apartment_type;
-        serviceDetails.lease_duration = req.body.long_duration;
-        serviceDetails.preferred_location = req.body.long_location;
-        serviceDetails.amenities = req.body.long_amenities;
-        serviceDetails.move_in_date = req.body.long_move_date;
-        serviceDetails.number_of_occupants = req.body.long_occupants;
-        serviceDetails.employment_status = req.body.long_employment;
-        serviceDetails.monthly_budget = req.body.long_budget;
-        serviceDetails.parking_requirements = req.body.long_parking;
-        serviceDetails.pets = req.body.long_pets;
-        serviceDetails.additional_requirements = req.body.long_special;
+        serviceDetails.apartment_type = sanitizeOptional(req.body.long_apartment_type);
+        serviceDetails.lease_duration = sanitizeOptional(req.body.long_duration);
+        serviceDetails.preferred_location = sanitizeOptional(req.body.long_location);
+        serviceDetails.amenities = sanitizeOptional(req.body.long_amenities);
+        serviceDetails.move_in_date = sanitizeOptional(req.body.long_move_date);
+        serviceDetails.number_of_occupants = sanitizeOptional(req.body.long_occupants);
+        serviceDetails.employment_status = sanitizeOptional(req.body.long_employment);
+        serviceDetails.monthly_budget = sanitizeOptional(req.body.long_budget);
+        serviceDetails.parking_requirements = sanitizeOptional(req.body.long_parking);
+        serviceDetails.pets = sanitizeOptional(req.body.long_pets);
+        serviceDetails.additional_requirements = sanitizeOptional(req.body.long_special);
     }
 
     if (service_type === 'car-hire') {
-        serviceDetails.vehicle_type = req.body.car_type;
-        serviceDetails.rental_duration = req.body.car_duration;
-        serviceDetails.fuel_policy = req.body.car_fuel;
-        serviceDetails.transmission = req.body.car_transmission;
-        serviceDetails.required_features = req.body.car_features;
-        serviceDetails.driver_service = req.body.car_driver;
-        serviceDetails.delivery_location = req.body.car_delivery;
+        serviceDetails.vehicle_type = sanitizeOptional(req.body.car_type);
+        serviceDetails.rental_duration = sanitizeOptional(req.body.car_duration);
+        serviceDetails.fuel_policy = sanitizeOptional(req.body.car_fuel);
+        serviceDetails.transmission = sanitizeOptional(req.body.car_transmission);
+        serviceDetails.required_features = sanitizeOptional(req.body.car_features);
+        serviceDetails.driver_service = sanitizeOptional(req.body.car_driver);
+        serviceDetails.delivery_location = sanitizeOptional(req.body.car_delivery);
     }
 
     if (service_type === 'hotels') {
-        serviceDetails.star_rating = req.body.hotel_star;
-        serviceDetails.number_of_rooms = req.body.hotel_rooms;
-        serviceDetails.room_type = req.body.hotel_room_type;
-        serviceDetails.board_basis = req.body.hotel_board;
-        serviceDetails.required_amenities = req.body.hotel_amenities;
-        serviceDetails.special_requirements = req.body.hotel_special;
+        serviceDetails.star_rating = sanitizeOptional(req.body.hotel_star);
+        serviceDetails.number_of_rooms = sanitizeOptional(req.body.hotel_rooms);
+        serviceDetails.room_type = sanitizeOptional(req.body.hotel_room_type);
+        serviceDetails.board_basis = sanitizeOptional(req.body.hotel_board);
+        serviceDetails.required_amenities = sanitizeOptional(req.body.hotel_amenities);
+        serviceDetails.special_requirements = sanitizeOptional(req.body.hotel_special);
     }
 
     if (service_type === 'air-tickets') {
-        serviceDetails.flight_type = req.body.flight_type;
-        serviceDetails.flight_class = req.body.flight_class;
-        serviceDetails.departure_city = req.body.flight_from;
-        serviceDetails.destination_city = req.body.flight_to;
-        serviceDetails.return_date = req.body.flight_return_date;
-        serviceDetails.airline_preference = req.body.flight_airline;
-        serviceDetails.baggage_requirement = req.body.flight_baggage;
+        serviceDetails.flight_type = sanitizeOptional(req.body.flight_type);
+        serviceDetails.flight_class = sanitizeOptional(req.body.flight_class);
+        serviceDetails.departure_city = sanitizeOptional(req.body.flight_from);
+        serviceDetails.destination_city = sanitizeOptional(req.body.flight_to);
+        serviceDetails.return_date = sanitizeOptional(req.body.flight_return_date);
+        serviceDetails.airline_preference = sanitizeOptional(req.body.flight_airline);
+        serviceDetails.baggage_requirement = sanitizeOptional(req.body.flight_baggage);
     }
 
     if (service_type === 'visa') {
-        serviceDetails.destination_country = req.body.visa_country;
-        serviceDetails.visa_type = req.body.visa_type;
-        serviceDetails.intended_stay = req.body.visa_duration;
-        serviceDetails.number_of_entries = req.body.visa_entries;
-        serviceDetails.current_citizenship = req.body.visa_citizenship;
-        serviceDetails.available_documents = req.body.visa_docs;
+        serviceDetails.destination_country = sanitizeOptional(req.body.visa_country);
+        serviceDetails.visa_type = sanitizeOptional(req.body.visa_type);
+        serviceDetails.intended_stay = sanitizeOptional(req.body.visa_duration);
+        serviceDetails.number_of_entries = sanitizeOptional(req.body.visa_entries);
+        serviceDetails.current_citizenship = sanitizeOptional(req.body.visa_citizenship);
+        serviceDetails.available_documents = sanitizeOptional(req.body.visa_docs);
     }
 
     if (service_type === 'travel-insurance') {
-        serviceDetails.coverage_type = req.body.insurance_coverage;
-        serviceDetails.coverage_features = req.body.insurance_features;
-        serviceDetails.estimated_trip_value = req.body.insurance_trip_value;
-        serviceDetails.travelers_covered = req.body.insurance_travelers;
-        serviceDetails.primary_destination = req.body.insurance_destination;
+        serviceDetails.coverage_type = sanitizeOptional(req.body.insurance_coverage);
+        serviceDetails.coverage_features = sanitizeOptional(req.body.insurance_features);
+        serviceDetails.estimated_trip_value = sanitizeOptional(req.body.insurance_trip_value);
+        serviceDetails.travelers_covered = sanitizeOptional(req.body.insurance_travelers);
+        serviceDetails.primary_destination = sanitizeOptional(req.body.insurance_destination);
     }
 
     if (service_type === 'full-package') {
-        serviceDetails.trip_type = req.body.package_trip_type;
-        serviceDetails.trip_duration = req.body.package_duration;
-        serviceDetails.budget_range = req.body.package_budget;
-        serviceDetails.services_needed = req.body.package_services;
-        serviceDetails.special_requirements = req.body.package_special;
+        serviceDetails.trip_type = sanitizeOptional(req.body.package_trip_type);
+        serviceDetails.trip_duration = sanitizeOptional(req.body.package_duration);
+        serviceDetails.budget_range = sanitizeOptional(req.body.package_budget);
+        serviceDetails.services_needed = sanitizeOptional(req.body.package_services);
+        serviceDetails.special_requirements = sanitizeOptional(req.body.package_special);
     }
 
     try {
@@ -371,7 +454,7 @@ router.post('/submit-quotation', async (req, res) => {
                 destination,
                 service_type,
                 travel_date,
-                num_travelers,
+                num_travelers: parseInt(num_travelers, 10) || 1,
                 message,
                 current_location: `${town}, ${country}`,
                 service_details: serviceDetails,
@@ -398,7 +481,37 @@ router.post('/submit-quotation', async (req, res) => {
 
 router.post('/partner-up', async (req, res) => {
     const query = req.app.get('query');
-    const { company_name, contact_name, email, phone, partnership_type, website, message } = req.body;
+    const company_name = sanitize(req.body.company_name);
+    const contact_name = sanitize(req.body.contact_name);
+    const email = sanitize(req.body.email);
+    const phone = sanitize(req.body.phone);
+    const partnership_type = sanitize(req.body.partnership_type);
+    const website = sanitize(req.body.website);
+    const message = sanitize(req.body.message);
+
+    const validPartnershipTypes = ['hotel', 'restaurant', 'transport', 'tour_operator', 'corporate', 'destination', 'other'];
+
+    if (!validateRequiredText(company_name, 200) || !validateRequiredText(contact_name, 100) || !validateEmail(email) || !validatePhone(phone) || !validPartnershipTypes.includes(partnership_type) || !validateRequiredText(message, 5000)) {
+        return res.status(400).render('error', {
+            title: 'Validation Error',
+            message: 'Please check your inputs and try again. Ensure all required fields are filled correctly.'
+        });
+    }
+
+    if (website && website.length > 0 && !validator.isURL(website)) {
+        return res.status(400).render('error', {
+            title: 'Validation Error',
+            message: 'Please enter a valid website URL or leave the field empty.'
+        });
+    }
+
+    const recaptchaValid = await validateRecaptcha(req.body['g-recaptcha-response']);
+    if (!recaptchaValid) {
+        return res.status(400).render('error', {
+            title: 'Verification Failed',
+            message: 'reCAPTCHA verification failed. Please try again.'
+        });
+    }
 
     try {
         const response = await query('/items/partnership_requests', {
@@ -409,7 +522,7 @@ router.post('/partner-up', async (req, res) => {
                 email,
                 phone,
                 partnership_type,
-                website,
+                website: website || '',
                 message,
                 status: 'published'
             })

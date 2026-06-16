@@ -119,6 +119,9 @@
                     <label for="message">Tell Us About Your Business</label>
                     <textarea id="message" name="message" placeholder="Describe your services and how you envision working with ForestHillsAdventures..." required></textarea>
                 </div>
+                <div class="field" style="margin-top: 1.5rem;">
+                    <div class="g-recaptcha" data-sitekey="<%= recaptcha_site_key %>"></div>
+                </div>
                 <div style="margin-top: 2rem;">
                     <button type="submit" class="btn" style="padding: 1rem 3rem;">Submit Partnership Request</button>
                 </div>
@@ -127,4 +130,5 @@
     </div>
 </main>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <%- include('partials/footer') %>
